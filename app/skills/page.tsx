@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Code2, Server, GraduationCap, BookOpen } from 'lucide-react';
+import { Code2, Server, GraduationCap, BookOpen, ChevronDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 type Course = {
   code: string;
@@ -19,6 +19,24 @@ type CertGroup = {
 };
 
 export default function SkillsPage() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  // Track scroll progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress((scrollTop / docHeight) * 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const certGroups: CertGroup[] = [
     {
       name: 'Web & Computer Programming',
@@ -408,129 +426,179 @@ export default function SkillsPage() {
   ];
 
   return (
-    <section className="min-h-screen px-6 sm:px-8 py-24 bg-[#0A0A0F]">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-block font-mono text-xs tracking-widest text-[#A78BFA] uppercase mb-4">
-            Skills / Home
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Technical Skills</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            A comprehensive breakdown of the technologies, frameworks, and tools mastered through
-            BYU–Idaho's Software Development degree program.
-          </p>
-        </motion.div>
+    <>
+      {/* Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 z-50 transition-all duration-200"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
-        {/* Certificate path */}
-        <motion.div
-          className="flex flex-wrap justify-center items-center gap-3 mb-16"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          {certGroups
-            .filter((group) => group.award !== "Bachelor's-Level Requirement")
-            .map((group, i, arr) => (
-              <div key={group.name} className="flex items-center gap-3">
-                <div className="flex items-center gap-2 bg-[#12121A] border border-[#8B5CF6]/30 rounded-full px-4 py-2">
-                  <span className="font-mono text-xs text-[#A78BFA]">0{i + 1}</span>
-                  <span className="text-sm text-gray-200">{group.name}</span>
-                </div>
-                {i < arr.length - 1 && <span className="text-gray-600">→</span>}
-              </div>
-            ))}
-        </motion.div>
+      {/* Animated Background */}
+      <div className="fixed inset-0 bg-[#0a0a0f] z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)
+            `
+          }}
+        />
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+            animation: 'drift 20s linear infinite',
+          }}
+        />
+      </div>
 
-        {/* Certificate groups */}
-        <div className="space-y-14">
-          {certGroups.map((group, groupIndex) => {
-            const GroupIcon = group.icon;
-            return (
-              <motion.div
-                key={group.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6, delay: groupIndex * 0.05 }}
-              >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-11 h-11 shrink-0 bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 rounded-lg flex items-center justify-center">
-                    <GroupIcon className="text-[#A78BFA]" size={22} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-xl font-bold text-white">{group.name} Certificate</h3>
-                      <span className="font-mono text-xs text-gray-500 border border-gray-800 rounded-full px-2 py-0.5">
-                        {group.award}
-                      </span>
-                    </div>
-                    <p className="text-gray-400 text-sm mt-1 max-w-2xl">{group.summary}</p>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {group.courses.map((course, i) => (
-                    <motion.div
-                      key={course.code}
-                      className="bg-[#12121A] border border-gray-800 rounded-xl p-5"
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.4, delay: i * 0.05 }}
-                      whileHover={{ y: -3, borderColor: 'rgba(139, 92, 246, 0.4)' }}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="font-mono text-xs text-[#A78BFA] bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 rounded px-1.5 py-0.5">
-                          {course.code}
-                        </span>
-                        <h4 className="text-sm font-semibold text-white">{course.title}</h4>
-                      </div>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-4">{course.focus}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {course.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="text-xs text-gray-300 bg-white/5 border border-gray-800 rounded-full px-2.5 py-1"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Capstone note */}
-        <motion.div
-          className="mt-16 bg-[#12121A] border border-[#8B5CF6]/30 rounded-2xl p-8"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Bachelor's Degree Completed</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Completed all three certificates in the Software Development track at Brigham
-              Young University–Idaho, capped by a senior project (CSE 499) that applied the full
-              software development life cycle — planning, design, development, testing, and
-              deployment — end to end.
+      <main className="relative z-10 min-h-screen">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-28">
+          {/* Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <span className={`inline-block font-mono text-xs tracking-widest text-purple-400 uppercase mb-4 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
+              Skills / Home
+            </span>
+            <h2 className={`text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '100ms' }}>
+              <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                Technical Skills
+              </span>
+            </h2>
+            <p className={`text-lg text-gray-300 max-w-2xl mx-auto transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '150ms' }}>
+              A comprehensive breakdown of the technologies, frameworks, and tools mastered through
+              BYU–Idaho's Software Development degree program.
             </p>
           </div>
-        </motion.div>
-      </div>
-    </section>
+
+          {/* Certificate path */}
+          <div className="flex flex-wrap justify-center items-center gap-3 mb-12 md:mb-16">
+            {certGroups
+              .filter((group) => group.award !== "Bachelor's-Level Requirement")
+              .map((group, i, arr) => (
+                <div key={group.name} className="flex items-center gap-3">
+                  <div 
+                    className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-purple-500/30 rounded-full px-4 py-2 transition-all duration-300 hover:border-purple-500/60"
+                    style={{
+                      transitionDelay: `${200 + i * 50}ms`,
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(12px)',
+                    }}
+                  >
+                    <span className="font-mono text-xs text-purple-400">0{i + 1}</span>
+                    <span className="text-sm text-gray-200">{group.name}</span>
+                  </div>
+                  {i < arr.length - 1 && <span className="text-gray-600">→</span>}
+                </div>
+              ))}
+          </div>
+
+          {/* Certificate groups */}
+          <div className="space-y-12 md:space-y-14">
+            {certGroups.map((group, groupIndex) => {
+              const GroupIcon = group.icon;
+              return (
+                <div
+                  key={group.name}
+                  className={`transition-all duration-1000 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: `${300 + groupIndex * 100}ms` }}
+                >
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-11 h-11 shrink-0 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center">
+                      <GroupIcon className="text-purple-400" size={22} />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h3 className="text-xl font-bold text-white">{group.name} Certificate</h3>
+                        <span className="font-mono text-xs text-gray-500 border border-white/10 rounded-full px-2 py-0.5">
+                          {group.award}
+                        </span>
+                      </div>
+                      <p className="text-gray-400 text-sm mt-1 max-w-2xl">{group.summary}</p>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    {group.courses.map((course, i) => (
+                      <div
+                        key={course.code}
+                        className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1"
+                        style={{
+                          transitionDelay: `${400 + i * 50}ms`,
+                          opacity: isVisible ? 1 : 0,
+                          transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
+                        }}
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="font-mono text-xs text-purple-400 bg-purple-500/10 border border-purple-500/30 rounded px-1.5 py-0.5">
+                            {course.code}
+                          </span>
+                          <h4 className="text-sm font-semibold text-white">{course.title}</h4>
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed mb-4">{course.focus}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {course.tools.map((tool) => (
+                            <span
+                              key={tool}
+                              className="text-xs text-gray-300 bg-white/5 border border-white/10 rounded-full px-2.5 py-1"
+                            >
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Capstone note */}
+          <div 
+            className={`mt-12 md:mt-16 bg-white/5 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6 md:p-8 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            style={{ transitionDelay: '600ms' }}
+          >
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">Bachelor's Degree Completed</h3>
+              <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Completed all three certificates in the Software Development track at Brigham
+                Young University–Idaho, capped by a senior project (CSE 499) that applied the full
+                software development life cycle — planning, design, development, testing, and
+                deployment — end to end.
+              </p>
+            </div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div className="flex justify-center mt-16">
+            <div className="flex flex-col items-center gap-2 text-gray-500 animate-bounce">
+              <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
+              <ChevronDown size={20} />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Global Styles */}
+      <style jsx global>{`
+        @keyframes drift {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(40px, 40px); }
+        }
+      `}</style>
+    </>
   );
 }
