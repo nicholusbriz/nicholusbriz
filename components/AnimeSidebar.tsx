@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Home, User, Code, FolderOpen, Mail, Menu, X } from 'lucide-react';
+import { Home, User, Code, FolderOpen, Mail, Menu, X, Download } from 'lucide-react';
 
 interface NavItem {
   name: string
@@ -187,6 +187,23 @@ export function AnimeSidebar({ items, className, defaultActive = "Home" }: Sideb
                     </Link>
                   )
                 })}
+              </div>
+
+              {/* Download Resume Button */}
+              <div className="mt-4 pt-4 border-t border-gray-800">
+                <a
+                  href="/NICHOLUS TURYAMUREBA (ATBRIZ).pdf"
+                  download
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10 transition-all duration-300 cursor-pointer"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Download size={20} strokeWidth={2.5} />
+                  </motion.div>
+                  <span>Download Resume</span>
+                </a>
               </div>
             </div>
           </motion.div>

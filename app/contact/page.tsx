@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Mail, 
   Phone, 
@@ -12,20 +12,33 @@ import {
   GraduationCap, 
   GitFork, 
   Link2,
-  ChevronDown 
+  ChevronDown,
+  Heart,
+  Globe,
+  Clock,
+  CheckCircle,
+  Sparkles,
+  Rocket,
+  Users,
+  Briefcase,
+  Code,
+  Star,
+  Coffee,
+  Compass,
+  ArrowRight,
+  Zap,
+  Eye,
+  Target
 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function ContactPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleSections, setVisibleSections] = useState<number[]>([]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -42,45 +55,173 @@ export default function ContactPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+  // Mouse tracking for parallax
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Form submitted:', formData);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset success message after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // Section visibility on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = sectionRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (entry.isIntersecting && index !== -1) {
+            setVisibleSections(prev => [...new Set([...prev, index])]);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
-  };
+    sectionRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Contact cards data
+  const contactCards = [
+    { 
+      icon: Mail, 
+      title: 'Email Me', 
+      detail: 'turyamurebanicholus@gmail.com',
+      description: 'Usually replies within 24 hours',
+      href: 'mailto:turyamurebanicholus@gmail.com',
+      color: 'purple'
+    },
+    { 
+      icon: Phone, 
+      title: 'Call Me', 
+      detail: '+256 761 996 296',
+      description: 'Available Mon–Fri, 09:00–18:00 EAT',
+      href: 'tel:+256761996296',
+      color: 'blue'
+    },
+    { 
+      icon: MapPin, 
+      title: 'Location', 
+      detail: 'Kampala, Uganda',
+      description: 'Open to Remote Work Worldwide',
+      href: undefined,
+      color: 'emerald'
+    },
+  ];
+
+  // Social cards data
+  const socialCards = [
+    { 
+      icon: GitFork, 
+      title: 'GitHub', 
+      detail: '120+ Repositories',
+      description: 'Explore My Code →',
+      href: 'https://github.com/nicholusbriz',
+      color: 'purple'
+    },
+    { 
+      icon: Link2, 
+      title: 'LinkedIn', 
+      detail: 'Professional Network',
+      description: "Let's Connect →",
+      href: 'https://www.linkedin.com/in/nicholus-turyamureba-194363378',
+      color: 'blue'
+    },
+    { 
+      icon: MessageCircle, 
+      title: 'WhatsApp', 
+      detail: 'Quick Conversation',
+      description: 'Usually Active',
+      href: 'https://wa.me/256761996296',
+      color: 'green'
+    },
+  ];
+
+  // Collaboration cards
+  const collaborationAreas = [
+    { icon: Code, title: 'Web Applications', description: 'Full-stack development with modern frameworks' },
+    { icon: Users, title: 'Community Platforms', description: 'Building spaces that connect people' },
+    { icon: Briefcase, title: 'Technical Consulting', description: 'Expert guidance for your projects' },
+    { icon: GraduationCap, title: 'Mentorship', description: 'Helping developers grow and learn' },
+    { icon: Rocket, title: 'Open Source', description: 'Contributing to the developer ecosystem' },
+    { icon: Coffee, title: 'Collaboration', description: "Let's build something amazing together" },
+  ];
+
+  // Timeline steps
+  const timelineSteps = [
+    { label: 'Message', icon: Send, duration: '24 Hours' },
+    { label: 'Discovery', icon: Eye, duration: '48 Hours' },
+    { label: 'Planning', icon: Target, duration: '1 Week' },
+    { label: 'Development', icon: Code, duration: 'Ongoing' },
+  ];
 
   return (
     <>
       {/* Progress Bar */}
       <div 
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 z-50 transition-all duration-200"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 z-50 transition-all duration-200"
         style={{ width: `${scrollProgress}%` }}
       />
 
+      {/* Premium Cursor */}
+      <div 
+        className="fixed pointer-events-none z-50 hidden lg:block"
+        style={{
+          transform: `translate(${mousePosition.x * 2 + window.innerWidth/2 - 8}px, ${mousePosition.y * 2 + window.innerHeight/2 - 8}px)`,
+          transition: 'transform 0.1s ease-out'
+        }}
+      >
+        <div className="w-3 h-3 bg-purple-500 rounded-full mix-blend-difference" />
+        <div className="absolute -top-4 -left-4 w-11 h-11 border border-purple-500/30 rounded-full animate-pulse" />
+      </div>
+
       {/* Animated Background */}
-      <div className="fixed inset-0 bg-[#0a0a0f] z-0">
+      <div className="fixed inset-0 bg-[#0a0a0f] z-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
+        
+        {/* Large background typography */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+          <div className="text-[15rem] md:text-[25rem] font-bold text-white tracking-[0.2em] select-none">
+            CONTACT
+          </div>
+        </div>
+
+        {/* Network nodes */}
+        <div className="absolute inset-0 opacity-20">
+          <svg className="w-full h-full">
+            {[...Array(25)].map((_, i) => (
+              <circle
+                key={i}
+                cx={Math.random() * 100 + '%'}
+                cy={Math.random() * 100 + '%'}
+                r="2"
+                fill="#8B5CF6"
+                className="animate-pulse"
+                style={{ animationDelay: `${i * 0.3}s` }}
+              />
+            ))}
+            {[...Array(15)].map((_, i) => (
+              <line
+                key={`line-${i}`}
+                x1={Math.random() * 100 + '%'}
+                y1={Math.random() * 100 + '%'}
+                x2={Math.random() * 100 + '%'}
+                y2={Math.random() * 100 + '%'}
+                stroke="#8B5CF6"
+                strokeWidth="0.5"
+                opacity="0.2"
+              />
+            ))}
+          </svg>
+        </div>
+
         <div 
           className="absolute inset-0 opacity-30"
           style={{
@@ -93,7 +234,7 @@ export default function ContactPage() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
             animation: 'drift 20s linear infinite',
           }}
@@ -102,274 +243,243 @@ export default function ContactPage() {
 
       <main className="relative z-10 min-h-screen">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-28">
-          {/* Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <span className={`inline-block font-mono text-xs tracking-widest text-purple-400 uppercase mb-4 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              Contact / Home
-            </span>
-            <h2 className={`text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`} style={{ transitionDelay: '100ms' }}>
-              <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                Get In Touch
-              </span>
-            </h2>
-            <p className={`text-lg text-gray-300 max-w-3xl mx-auto transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`} style={{ transitionDelay: '150ms' }}>
-              I'm always interested in collaborating on community-building projects, creative coding initiatives, and opportunities to blend technology with cultural storytelling. Whether you want to discuss developer communities, share ideas, or explore potential partnerships, I'd love to connect!
-            </p>
-            <p className={`text-sm text-purple-400 mt-2 font-medium transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`} style={{ transitionDelay: '200ms' }}>
-              Bachelor's Degree in Software Development | BYU–Idaho Graduate
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
-            {/* Left Column - Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className={`text-2xl font-bold text-white mb-6 transition-all duration-1000 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`} style={{ transitionDelay: '250ms' }}>
-                  Let's Connect
-                </h3>
-                
-                <div className="space-y-4">
-                  <div 
-                    className={`flex items-start gap-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1 ${
-                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                    }`}
-                    style={{ transitionDelay: '300ms' }}
-                  >
-                    <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="text-purple-400" size={24} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Email</h4>
-                      <p className="text-gray-400">turyamurebanicholus@gmail.com</p>
-                    </div>
-                  </div>
-
-                  <div 
-                    className={`flex items-start gap-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1 ${
-                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                    }`}
-                    style={{ transitionDelay: '350ms' }}
-                  >
-                    <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="text-purple-400" size={24} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Phone</h4>
-                      <p className="text-gray-400">+256 761 996 296</p>
-                    </div>
-                  </div>
-
-                  <div 
-                    className={`flex items-start gap-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1 ${
-                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                    }`}
-                    style={{ transitionDelay: '400ms' }}
-                  >
-                    <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="text-purple-400" size={24} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Location</h4>
-                      <p className="text-gray-400">Kampala, Uganda</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div 
-                className={`transition-all duration-1000 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: '450ms' }}
-              >
-                <h4 className="font-semibold text-white mb-4">Follow Me</h4>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.linkedin.com/in/nicholus-turyamureba-194363378"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:border-purple-500/40 hover:text-purple-400 hover:scale-110 transition-all duration-300"
-                    aria-label="LinkedIn"
-                  >
-                    <Link2 size={24} />
-                  </a>
-                  <a
-                    href="https://github.com/nicholusbriz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:border-purple-500/40 hover:text-purple-400 hover:scale-110 transition-all duration-300"
-                    aria-label="GitHub"
-                  >
-                    <GitFork size={24} />
-                  </a>
-                  <a
-                    href="https://wa.me/256761996296"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:border-purple-500/40 hover:text-purple-400 hover:scale-110 transition-all duration-300"
-                    aria-label="WhatsApp"
-                  >
-                    <MessageCircle size={24} />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column - Contact Form */}
-            <div 
-              className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 transition-all duration-1000 hover:border-purple-500/40 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    required
-                    className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your.email@example.com"
-                    required
-                    className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your message..."
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-lg font-medium transition-all duration-300 ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      Send Message
-                    </>
-                  )}
-                </button>
-
-                {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400 text-center animate-fadeIn">
-                    ✓ Message sent successfully!
-                  </div>
-                )}
-
-                {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-center animate-fadeIn">
-                    ✗ Failed to send message. Please try again.
-                  </div>
-                )}
-              </form>
-            </div>
-          </div>
-
-          {/* Footer */}
+          
+          {/* ===== HERO - Let's Build Something Amazing ===== */}
           <div 
-            className={`mt-12 md:mt-16 pt-8 border-t border-white/10 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-            style={{ transitionDelay: '500ms' }}
+            ref={el => { sectionRefs.current[0] = el; }} 
+            className={`min-h-[50vh] flex flex-col justify-center text-center transition-all duration-1000 ${visibleSections.includes(0) ? 'opacity-100' : 'opacity-0'}`}
           >
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <GraduationCap className="text-purple-500" size={24} />
-                  <h4 className="font-bold text-white">Nicholus Turyamureba</h4>
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-4 py-2 mx-auto">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-xs font-medium text-emerald-400">Available for Work</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9]">
+                <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                  Let's Build
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
+                  Something Amazing.
+                </span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Ready to turn ideas into software. Let's create something extraordinary together.
+              </p>
+            </div>
+          </div>
+
+          {/* ===== PORTRAIT + STATUS ===== */}
+          <div 
+            ref={el => { sectionRefs.current[1] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              {/* Portrait */}
+              <div className="relative group">
+                <div className="relative w-32 h-32 md:w-40 md:h-40">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
+                  <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/10 shadow-2xl"
+                    style={{
+                      transform: `perspective(500px) rotateY(${mousePosition.x * 2}deg) rotateX(${-mousePosition.y * 2}deg)`,
+                      transition: 'transform 0.3s ease-out'
+                    }}
+                  >
+                    <Image
+                      src="/nicholusbriz.png"
+                      alt="Nicholus Turyamureba"
+                      width={160}
+                      height={160}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <p className="text-sm text-gray-400">
-                  Tech-driven storyteller and community builder, passionate about blending code, culture & creativity to connect and empower communities.
-                </p>
-                <p className="text-xs text-purple-400 mt-2 font-medium">
-                  Bachelor's in Software Development
-                </p>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1">
-                <h4 className="font-bold text-white mb-4">Quick Links</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  <li><a href="/" className="hover:text-purple-400 transition-colors">Home</a></li>
-                  <li><a href="/about" className="hover:text-purple-400 transition-colors">About</a></li>
-                  <li><a href="/skills" className="hover:text-purple-400 transition-colors">Skills</a></li>
-                  <li><a href="/projects" className="hover:text-purple-400 transition-colors">Projects</a></li>
-                  <li><a href="/contact" className="hover:text-purple-400 transition-colors">Contact</a></li>
-                </ul>
+              {/* Info */}
+              <div className="text-center md:text-left">
+                <h2 className="text-2xl font-bold text-white">Nicholus Turyamureba</h2>
+                <p className="text-purple-400">Full Stack Software Engineer</p>
+                <div className="flex items-center justify-center md:justify-start gap-2 mt-2">
+                  <span className="text-sm text-gray-400">Uganda 🇺🇬</span>
+                  <span className="text-gray-600">•</span>
+                  <span className="text-sm text-emerald-400 flex items-center gap-1">
+                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                    Available
+                  </span>
+                </div>
               </div>
-
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1">
-                <h4 className="font-bold text-white mb-4">Resources</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  <li><a href="/resume.pdf" className="hover:text-purple-400 transition-colors">Resume</a></li>
-                  <li><a href="https://github.com/nicholusbriz" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors">GitHub</a></li>
-                  <li><a href="https://www.linkedin.com/in/nicholus-turyamureba-194363378" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors">LinkedIn</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="text-center text-sm text-gray-500">
-              <p>© 2026 Nicholus Turyamureba. All rights reserved. Made with ❤️ by Nicholus</p>
             </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="flex justify-center mt-16">
-            <div className="flex flex-col items-center gap-2 text-gray-500 animate-bounce">
-              <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
-              <ChevronDown size={20} />
+          {/* ===== CONTACT CARDS ===== */}
+          <div 
+            ref={el => { sectionRefs.current[2] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="grid md:grid-cols-3 gap-4">
+              {contactCards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <a
+                    key={index}
+                    href={card.href || '#'}
+                    className={`group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:border-${card.color}-500/50 ${!card.href ? 'cursor-default' : ''}`}
+                    onMouseEnter={() => setHoveredCard(card.title)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <div className={`p-3 bg-${card.color}-500/10 rounded-xl group-hover:bg-${card.color}-500/20 transition-all duration-300`}>
+                        <Icon className={`text-${card.color}-400`} size={28} />
+                      </div>
+                      <h3 className="text-lg font-bold text-white">{card.title}</h3>
+                      <p className="text-sm text-gray-300">{card.detail}</p>
+                      <p className="text-xs text-gray-500">{card.description}</p>
+                      {card.href && (
+                        <ArrowRight className="text-gray-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" size={16} />
+                      )}
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </div>
+
+          {/* ===== SOCIAL CARDS ===== */}
+          <div 
+            ref={el => { sectionRefs.current[3] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="grid md:grid-cols-3 gap-4">
+              {socialCards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <a
+                    key={index}
+                    href={card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:border-${card.color}-500/50`}
+                  >
+                    <div className="flex flex-col items-center gap-3">
+                      <div className={`p-3 bg-${card.color}-500/10 rounded-xl group-hover:bg-${card.color}-500/20 transition-all duration-300`}>
+                        <Icon className={`text-${card.color}-400`} size={28} />
+                      </div>
+                      <h3 className="text-lg font-bold text-white">{card.title}</h3>
+                      <p className="text-sm text-gray-300">{card.detail}</p>
+                      <p className="text-xs text-gray-500">{card.description}</p>
+                      <ArrowRight className="text-gray-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" size={16} />
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ===== COLLABORATION AREAS ===== */}
+          <div 
+            ref={el => { sectionRefs.current[4] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-2xl font-bold text-white">What Can I Help You Build?</h2>
+              <p className="text-gray-400 mt-2">Areas of expertise and collaboration</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {collaborationAreas.map((area, index) => {
+                const Icon = area.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:border-purple-500/50 cursor-pointer"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-all duration-300">
+                        <Icon className="text-purple-400" size={20} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium group-hover:text-purple-400 transition-colors">{area.title}</h4>
+                        <p className="text-xs text-gray-400 mt-1">{area.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ===== TIMELINE ===== */}
+          <div 
+            ref={el => { sectionRefs.current[5] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="text-center mb-12">
+              <h3 className="text-2xl font-bold text-white">How We'll Work Together</h3>
+              <p className="text-gray-400 mt-2">From first message to final delivery</p>
+            </div>
+
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              {timelineSteps.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 text-center min-w-[120px] hover:border-purple-500/50 transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center justify-center gap-2">
+                        <Icon className="text-purple-400" size={18} />
+                        <span className="text-sm font-medium text-white">{step.label}</span>
+                      </div>
+                      <span className="text-xs text-gray-500">{step.duration}</span>
+                    </div>
+                    {index < timelineSteps.length - 1 && (
+                      <ArrowRight className="text-gray-600" size={20} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ===== BUILT WITH SIGNATURE ===== */}
+          <div 
+            ref={el => { sectionRefs.current[6] = el; }} 
+            className={`py-16 border-t border-white/10 transition-all duration-1000 ${visibleSections.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="text-center">
+              <div className="flex flex-wrap justify-center gap-6 mb-6">
+                <span className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">Next.js</span>
+                <span className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">TypeScript</span>
+                <span className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">Tailwind CSS</span>
+                <span className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">Vercel</span>
+              </div>
+              
+              <div className="flex items-center justify-center gap-3 text-gray-500">
+                <Heart className="text-purple-400" size={16} />
+                <span>Made with</span>
+                <Heart className="text-pink-400" size={16} />
+                <span>by</span>
+                <span className="text-white font-medium">Nicholus Turyamureba</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-2">Software Engineer • Uganda • 2026</p>
+            </div>
+          </div>
+
+          {/* ===== FINAL MESSAGE ===== */}
+          <div 
+            ref={el => { sectionRefs.current[7] = el; }} 
+            className={`py-16 text-center transition-all duration-1000 ${visibleSections.includes(7) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            <div className="space-y-4">
+              <Sparkles className="text-purple-400 mx-auto" size={32} />
+              <p className="text-2xl text-gray-300">Looking forward to building with you.</p>
+              <p className="text-sm text-gray-500">Thank you for visiting. See you soon.</p>
+            </div>
+          </div>
+
         </div>
       </main>
 
@@ -379,14 +489,20 @@ export default function ContactPage() {
           0% { transform: translate(0, 0); }
           100% { transform: translate(40px, 40px); }
         }
-        
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
         .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
+          animation: fadeIn 0.5s ease-out;
         }
       `}</style>
     </>
