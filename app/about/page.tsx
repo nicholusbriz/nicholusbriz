@@ -65,6 +65,7 @@ export default function AboutPage() {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<number[]>([]);
+  const [windowDimensions, setWindowDimensions] = useState({ width: 1920, height: 1080 });
 
   // Progress tracking
   useEffect(() => {
@@ -159,6 +160,14 @@ export default function AboutPage() {
     setIsVisible(true);
   }, []);
 
+  // Set window dimensions on client side
+  useEffect(() => {
+    setWindowDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }, []);
+
   // Contacts data
   const contacts = [
     { icon: MapPin, label: 'Kampala, Uganda', href: undefined },
@@ -231,7 +240,7 @@ export default function AboutPage() {
       <div 
         className="fixed pointer-events-none z-50 hidden lg:block"
         style={{
-          transform: `translate(${mousePosition.x * 2 + window.innerWidth/2 - 8}px, ${mousePosition.y * 2 + window.innerHeight/2 - 8}px)`,
+          transform: `translate(${mousePosition.x * 2 + windowDimensions.width/2 - 8}px, ${mousePosition.y * 2 + windowDimensions.height/2 - 8}px)`,
           transition: 'transform 0.1s ease-out'
         }}
       >

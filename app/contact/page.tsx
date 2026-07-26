@@ -39,9 +39,18 @@ export default function ContactPage() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<number[]>([]);
+  const [windowDimensions, setWindowDimensions] = useState({ width: 1920, height: 1080 });
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  // Set window dimensions on client side
+  useEffect(() => {
+    setWindowDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   }, []);
 
   // Track scroll progress
@@ -174,7 +183,7 @@ export default function ContactPage() {
       <div 
         className="fixed pointer-events-none z-50 hidden lg:block"
         style={{
-          transform: `translate(${mousePosition.x * 2 + window.innerWidth/2 - 8}px, ${mousePosition.y * 2 + window.innerHeight/2 - 8}px)`,
+          transform: `translate(${mousePosition.x * 2 + windowDimensions.width/2 - 8}px, ${mousePosition.y * 2 + windowDimensions.height/2 - 8}px)`,
           transition: 'transform 0.1s ease-out'
         }}
       >
