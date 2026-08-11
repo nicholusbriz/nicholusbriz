@@ -1,4 +1,18 @@
-'use client';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch with Nicholus Turyamureba (Atbriz), a Software Developer based in Kampala, Uganda. Available for web development projects, collaborations, and consulting opportunities.",
+  keywords: ["Contact", "Get In Touch", "Hire Developer", "Software Developer Contact", "Web Development Services", "Atbriz Contact", "Nicholus Turyamureba Contact"],
+  alternates: {
+    canonical: "https://nicholusbriz.vercel.app/contact",
+  },
+  openGraph: {
+    title: "Contact | Atbriz - Software Developer",
+    description: "Get in touch with Nicholus Turyamureba (Atbriz), a Software Developer based in Kampala, Uganda. Available for web development projects, collaborations, and consulting opportunities.",
+    url: "https://nicholusbriz.vercel.app/contact",
+  },
+};
 
 import { Mail, Phone, MapPin, Send, GitFork, Link2, MessageCircle, Code, Users, Briefcase, GraduationCap, Rocket, Coffee } from 'lucide-react';
 import Link from 'next/link';
