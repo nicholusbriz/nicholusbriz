@@ -1,77 +1,74 @@
-Hi, I'm Atbriz
+<!-- ANIMATED HEADER -->
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=30&duration=3000&pause=1000&color=00F7FF&center=true&vCenter=true&width=600&lines=Hey!+I'm+Nicholus+Turyamureba;Full+Stack+Software+Engineer;Community+Builder;Digital+Ecosystem+Architect;Problem+Solver" alt="Typing SVG" />
+</p>
 
-Software Developer
-Bachelor's Degree in Software Development
-Brigham Young University - Idaho
+<!-- SOCIAL BADGES WITH ANIMATION -->
+<p align="center">
+  <a href="https://nicholusbriz.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=web&logoColor=white" alt="Portfolio" />
+  </a>
+  <a href="https://github.com/nicholusbriz" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://www.linkedin.com/in/nicholus-turyamureba-194363378" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="mailto:turyamurebanicholus@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+</p>
 
-My Education
+<!-- PROFILE VIEWS & VISITOR COUNTER -->
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=nicholusbriz&label=PROFILE+VIEWS&color=00F7FF&style=for-the-badge" alt="Profile Views" />
+  <img src="https://img.shields.io/github/followers/nicholusbriz?label=FOLLOWERS&style=for-the-badge&color=00F7FF" alt="Followers" />
+  <img src="https://img.shields.io/github/stars/nicholusbriz?label=STARS&style=for-the-badge&color=00F7FF" alt="Stars" />
+</p>
 
-I completed a comprehensive software development program that covered the full spectrum of modern software engineering from foundational programming to professional deployment practices.
+<!-- DIVIDER -->
+<hr />
 
-What I Learned
+<!-- ABOUT ME SECTION WITH ICONS -->
+<h2 align="center">
+  <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35px" />
+  About Me
+</h2>
 
-Programming and Data
+<p align="center">
+  <img align="right" src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" width="300px" />
+</p>
 
-Procedural and Object-Oriented Programming - C++, C#, Java, Python
-Data Structures - Lists, Trees, Hash Maps, Stacks, Queues
-Algorithms - Sorting, Searching, Recursion, Big-O Analysis
-Memory Management - Pointers, References, Garbage Collection
+```js
+const nicholus = {
+  location: "🌍 Kampala, Uganda",
+  education: "🎓 BSc. Software Development | BYU–Idaho (2022-2025)",
+  currentFocus: "🚀 Building digital ecosystems that connect communities",
+  philosophy: "💡 Write clean, maintainable code that solves real problems",
+  passion: "👥 Fostering inclusive developer communities",
+  interests: [
+    "Full-Stack Web Development",
+    "Cloud Architecture",
+    "Open Source",
+    "Technical Mentorship",
+    "Community Building"
+  ]
+};
 
-Web Development
+<p align="left"> <strong>🔭 Current Focus:</strong> Building the <strong>Avora Pig Farming Platform</strong><br /> <strong>🌱 Learning:</strong> Advanced Cloud Architecture (AWS) & DevOps<br /> <strong>👯 Open to:</strong> Collaborating on impactful Open Source projects<br /> <strong>💬 Expertise:</strong> React, Next.js, Node.js, MongoDB, System Design<br /> <strong>⚡ Fun Fact:</strong> I turn complex problems into elegant solutions ✨<br /> </p><!-- DIVIDER --><hr /><!-- TECH STACK WITH HOVER EFFECTS --><h2 align="center"> <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="35px" /> Technical Arsenal </h2><h3 align="center">💻 Programming Languages</h3> <p align="center"> <img src="https://img.shields.io/badge/JavaScript-Expert-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" /> <img src="https://img.shields.io/badge/TypeScript-Advanced-3178C6?style=for-the-badge&logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/Python-Advanced-3776AB?style=for-the-badge&logo=python&logoColor=white" /> <img src="https://img.shields.io/badge/C%23-Advanced-239120?style=for-the-badge&logo=csharp&logoColor=white" /> <img src="https://img.shields.io/badge/SQL-Advanced-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" /> </p><h3 align="center">🎨 Frontend Development</h3> <p align="center"> <img src="https://img.shields.io/badge/React-Expert-61DAFB?style=for-the-badge&logo=react&logoColor=black" /> <img src="https://img.shields.io/badge/Next.js-Advanced-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" /> <img src="https://img.shields.io/badge/Tailwind_CSS-Advanced-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img src="https://img.shields.io/badge/HTML5-Expert-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-Expert-1572B6?style=for-the-badge&logo=css3&logoColor=white" /> </p><h3 align="center">⚙️ Backend & Databases</h3> <p align="center"> <img src="https://img.shields.io/badge/Node.js-Advanced-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/Express.js-Advanced-000000?style=for-the-badge&logo=express&logoColor=white" /> <img src="https://img.shields.io/badge/.NET-Advanced-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" /> <img src="https://img.shields.io/badge/MongoDB-Advanced-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" /> <img src="https://img.shields.io/badge/PostgreSQL-Advanced-316192?style=for-the-badge&logo=postgresql&logoColor=white" /> <img src="https://img.shields.io/badge/MySQL-Advanced-005C84?style=for-the-badge&logo=mysql&logoColor=white" /> </p><h3 align="center">☁️ Cloud & DevOps</h3> <p align="center"> <img src="https://img.shields.io/badge/AWS-Intermediate-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" /> <img src="https://img.shields.io/badge/Docker-Intermediate-2496ED?style=for-the-badge&logo=docker&logoColor=white" /> <img src="https://img.shields.io/badge/Kubernetes-Intermediate-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" /> <img src="https://img.shields.io/badge/Vercel-Advanced-000000?style=for-the-badge&logo=vercel&logoColor=white" /> <img src="https://img.shields.io/badge/Git-Expert-F05032?style=for-the-badge&logo=git&logoColor=white" /> </p><h3 align="center">🛠️ Development Tools</h3> <p align="center"> <img src="https://img.shields.io/badge/VS_Code-Expert-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" /> <img src="https://img.shields.io/badge/Postman-Advanced-FF6C37?style=for-the-badge&logo=postman&logoColor=white" /> <img src="https://img.shields.io/badge/Jest-Advanced-C21325?style=for-the-badge&logo=jest&logoColor=white" /> <img src="https://img.shields.io/badge/Chrome_DevTools-Expert-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" /> </p><!-- DIVIDER --><hr /><!-- EXPERIENCE SECTION WITH TIMELINE --><h2 align="center"> <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="35px" /> Professional Journey </h2><!-- EXPERIENCE CARD 1 --><h3>💼 Software Developer</h3> <p> <strong>Freedom City Tech Center</strong> · <em>2023 – Present</em> </p><table> <tr> <td>✅</td> <td>Designed and developed full-stack web applications for technology education center management</td> </tr> <tr> <td>✅</td> <td>Built role-based dashboards with granular JWT authentication and authorization</td> </tr> <tr> <td>✅</td> <td>Optimized database performance through query optimization and indexing strategies</td> </tr> <tr> <td>✅</td> <td>Mentored junior developers and led code reviews to maintain high-quality standards</td> </tr> <tr> <td>✅</td> <td>Implemented responsive interfaces using Tailwind CSS for desktop and mobile</td> </tr> </table><!-- EXPERIENCE CARD 2 --><h3>🌟 Developer Community Leader</h3> <p> <strong>Ugandan Tech Community</strong> · <em>2023 – Present</em> </p><table> <tr> <td>✅</td> <td>Built and led inclusive developer communities fostering innovation in Uganda</td> </tr> <tr> <td>✅</td> <td>Organized technical workshops and training sessions for aspiring developers</td> </tr> <tr> <td>✅</td> <td>Mentored students and junior developers in software engineering best practices</td> </tr> <tr> <td>✅</td> <td>Facilitated open source contribution opportunities for community members</td> </tr> </table><!-- DIVIDER --><hr /><!-- PROJECTS WITH BEAUTIFUL CARDS --><h2 align="center"> <img src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif" width="35px" /> Featured Projects </h2><!-- PROJECT CARD 1 --><details> <summary> <h3>🐷 Avora Pig Farming Platform</h3> </summary> <p> <strong>Full Stack Developer</strong> · <em>2025</em> </p> <blockquote> Comprehensive farm management system with real-time production tracking and herd management </blockquote> <p> <strong>Tech Stack:</strong> <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" /> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" /> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white" /> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" /> </p> <p> <a href="https://avora-pig-farming.vercel.app/" target="_blank"> <img src="https://img.shields.io/badge/Live_Demo-00F7FF?style=for-the-badge&logo=vercel&logoColor=black" /> </a> <a href="https://github.com/nicholusbriz/avora-pig-farming" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> </p> </details><!-- PROJECT CARD 2 --><details> <summary> <h3>🏫 Freedom City Tech Center Management System</h3> </summary> <p> <strong>Lead Full Stack Developer</strong> · <em>2024</em> </p> <blockquote> Multi-tenant management system with role-based dashboards and analytics </blockquote> <p> <strong>Tech Stack:</strong> <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" /> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white" /> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" /> </p> <p> <a href="https://freedom-city-center.vercel.app/" target="_blank"> <img src="https://img.shields.io/badge/Live_Demo-00F7FF?style=for-the-badge&logo=vercel&logoColor=black" /> </a> <a href="https://github.com/nicholusbriz/freedom-city-center" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> </p> </details><!-- PROJECT CARD 3 --><details> <summary> <h3>✈️ Liahona Tourism Booking Platform</h3> </summary> <p> <strong>Full Stack Developer</strong> · <em>2024</em> </p> <blockquote> Tourism booking website with tour browsing, booking system, and payment integration </blockquote> <p> <strong>Tech Stack:</strong> <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" /> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" /> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white" /> <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white" /> </p> <p> <a href="https://liahona-tourism.vercel.app/" target="_blank"> <img src="https://img.shields.io/badge/Live_Demo-00F7FF?style=for-the-badge&logo=vercel&logoColor=black" /> </a> <a href="https://github.com/nicholusbriz/liahona-tourism" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> </p> </details><!-- PROJECT CARD 4 --><details> <summary> <h3>🌐 Community Engagement Platform</h3> </summary> <p> <strong>Full Stack Developer</strong> · <em>2024</em> </p> <blockquote> Community platform with user profiles, discussion forums, events management, and real-time messaging </blockquote> <p> <strong>Tech Stack:</strong> <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" /> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" /> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white" /> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" /> </p> <p> <a href="https://community-engagement.vercel.app/" target="_blank"> <img src="https://img.shields.io/badge/Live_Demo-00F7FF?style=for-the-badge&logo=vercel&logoColor=black" /> </a> <a href="https://github.com/nicholusbriz/community-engagement" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> </p> </details><!-- DIVIDER --><hr /><!-- EDUCATION SECTION --><h2 align="center"> <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" width="35px" /> Education & Certifications </h2><!-- EDUCATION CARD --><div align="center">
+🎓 Bachelor of Science in Software Development
+Brigham Young University–Idaho · 2022 – 2025
+Certificates Earned
+📜 Web & Computer Programming — Python, C#, Web Fundamentals, Data Structures
+📜 Web Development Certificate — Full-stack development, Databases, REST APIs, MEAN Stack
+📜 Software Development Certificate — Advanced Engineering, Testing, .NET, Agile Methodologies
+Capstone Project (CSE 499): Applied full Software Development Life Cycle from planning through deployment
 
-Frontend - HTML, CSS, JavaScript, Responsive Design
-Backend - Server-side logic, RESTful APIs, Authentication
-Full-Stack - Connecting frontend to backend to database
-
-Databases
-
-SQL - MySQL, PostgreSQL, Complex JOINs, Normalization
-Database Design - Entity-Relationship Diagrams, Schema Design
-CRUD Operations - Create, Read, Update, Delete
-
-Software Engineering
-
-SDLC - Requirements, Design, Implementation, Testing, Deployment
-Agile and Scrum - Sprints, Standups, Team Collaboration
-Design Patterns - MVC, Singleton, Factory, Observer
-UML Diagrams - Class, Sequence, Activity Diagrams
-
-Testing and Quality
-
-Unit Testing - Writing automated tests
-Test-Driven Development (TDD) - Write tests first, then code
-Debugging - Using debuggers, reading stack traces
-Code Reviews - Giving and receiving feedback
-
-Tools and Platforms
-
-Version Control - Git, GitHub, Branching, Merging, Pull Requests
-DevOps - CI/CD, Cloud (AWS), Containers (Docker)
-AI Tools - GitHub Copilot, AI-assisted development
-Collaboration - Slack, Teams, Project Management Tools
-
-Frameworks and Languages
-
-.NET - C#, ASP.NET
-Java - Spring Boot
-Python - Flask, Django
-JavaScript - Node.js, React, Express
-
-Featured Projects
-
-Technical Skills
-
-Languages: C++, C#, Java, Python, JavaScript, SQL, HTML, CSS
-Frameworks: .NET, React, Node.js, Express, Flask
-Databases: PostgreSQL, MySQL, MongoDB
-Tools: Git, GitHub, Docker, AWS, VS Code, Visual Studio
-Practices: Agile/Scrum, TDD, Code Reviews, UML, CI/CD
-
-Connect With Me
-
-Email: 
-LinkedIn: 
-GitHub: 
-Portfolio: 
-
-Built with the skills learned at BYU-Idaho
+</div><!-- DIVIDER --><hr /><!-- LEADERSHIP & COMMUNITY --><h2 align="center"> <img src="https://media.giphy.com/media/LnQjpWaON8nwid21BO/giphy.gif" width="35px" /> Leadership & Community Impact </h2><div align="center">
+🌟 Role	📝 Impact
+Developer Community Leader	Building inclusive developer communities and advocating for fairness in tech
+Technical Mentor	Mentoring aspiring developers and students in software engineering practices
+Open Source Contributor	Active participation in open source projects and community contributions
+Tech Workshop Facilitator	Organized training sessions on web development and programming fundamentals
+Community Advocate	Promoting inclusive communication and teamwork in developer communities
+</div><!-- DIVIDER --><hr /><!-- GITHUB STATS WITH CHARTS --><h2 align="center"> <img src="https://media.giphy.com/media/VgCDAzcKvsR6OM0uWg/giphy.gif" width="35px" /> GitHub Analytics </h2><p align="center"> <img width="49%" src="https://github-readme-stats.vercel.app/api?username=nicholusbriz&show_icons=true&theme=radical&hide_border=true&include_all_commits=true&count_private=true" /> <img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=nicholusbriz&theme=radical&hide_border=true" /> </p><p align="center"> <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=nicholusbriz&layout=compact&theme=radical&hide_border=true&langs_count=8" /> <img width="49%" src="https://github-readme-activity-graph.vercel.app/graph?username=nicholusbriz&theme=react-dark&hide_border=true&area=true" /> </p><!-- DIVIDER --><hr /><!-- CONNECT WITH ME --><h2 align="center"> <img src="https://media.giphy.com/media/fuJPZBIIqzbt1kAYVc/giphy.gif" width="35px" /> Let's Connect </h2><p align="center"> <i>I'm always open to interesting conversations, collaboration, and mentorship opportunities.</i> </p><p align="center"> <a href="https://nicholusbriz.vercel.app" target="_blank"> <img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=web&logoColor=white" /> </a> <a href="https://github.com/nicholusbriz" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /> </a> <a href="https://www.linkedin.com/in/nicholus-turyamureba-194363378" target="_blank"> <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /> </a> <a href="mailto:turyamurebanicholus@gmail.com"> <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a> </p><p align="center"> <img src="https://img.shields.io/badge/Location-Kampala,_Uganda-00F7FF?style=for-the-badge&logo=googlemaps&logoColor=white" /> <img src="https://img.shields.io/badge/Phone-+256_761_996_296-00F7FF?style=for-the-badge&logo=whatsapp&logoColor=white" /> </p><!-- DIVIDER --><hr /><!-- AVAILABILITY BANNER --><h2 align="center">📋 Availability</h2><p align="center"> <img src="https://img.shields.io/badge/Freelance_Projects-✅-00F7FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/Open_Source-✅-00F7FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/Full--Time_Positions-✅-00F7FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/Technical_Consulting-✅-00F7FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/Remote_Work-✅-00F7FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/Mentorship-✅-00F7FF?style=for-the-badge" /> </p><!-- DIVIDER --><hr /><!-- FOOTER WITH QUOTE --><p align="center"> <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" alt="Random Dev Quote" /> </p><p align="center"> <strong>🚀 Building bridges between code and community — one line at a time.</strong> </p><p align="center"> <img src="https://raw.githubusercontent.com/nicholusbriz/nicholusbriz/output/snake.svg" alt="Snake animation" /> </p><p align="center"> <i>⭐️ If you found this interesting, don't forget to star my projects!</i> </p><!-- FOOTER --><p align="center"> <sub>Built with ❤️ by Nicholus Turyamureba (ATBRIZ) © 2026</sub> </p> ```
