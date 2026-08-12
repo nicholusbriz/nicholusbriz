@@ -5,11 +5,13 @@
 
 import {
   ArrowRight,
+  Award,
   Briefcase,
   Check,
   Code,
   Database,
   Download,
+  ExternalLink,
   GitFork,
   Globe,
   Layers3,
@@ -291,6 +293,7 @@ const commandLinks = [
   { label: 'Home', href: '#top', hint: 'index' },
   { label: 'About', href: '#about', hint: 'bio' },
   { label: 'Skills', href: '#skills', hint: 'stack' },
+  { label: 'Certificates', href: '/certificates', hint: 'certs' },
   { label: 'Projects', href: '#projects', hint: 'work' },
   { label: 'Contact', href: '#contact', hint: 'reach out' },
   { label: 'Download Resume', href: '/NICHOLUS TURYAMUREBA (ATBRIZ).pdf', hint: '.pdf' },
@@ -832,6 +835,65 @@ export default function HomeContent() {
                   {isMuted ? 'Muted' : 'Sound On'}
                 </span>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Featured Certificate Section */}
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            animate="visible"
+            className="mt-20 max-w-3xl mx-auto"
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-[#26272d] bg-[#0f0f0f] p-8 shadow-[0_0_60px_rgba(47,233,43,0.08)]">
+              <div className="flex items-start gap-6">
+                <motion.div
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#26272d] bg-[#0a0a0a]"
+                  whileHover={{ rotate: -6, scale: 1.08 }}
+                >
+                  <Award className="h-8 w-8 text-[#2fe92b]" />
+                </motion.div>
+                
+                <div className="flex-1">
+                  <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-[#2fe92b]/20 bg-[#2fe92b]/5 px-3 py-1 text-[10px] font-mono tracking-wider text-[#2fe92b]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#2fe92b]" />
+                    Featured Certification
+                  </div>
+                  
+                  <h3 className="mb-2 text-xl font-semibold tracking-tight">
+                    Web & Computer Programming
+                  </h3>
+                  <p className="mb-4 text-sm leading-relaxed text-[#bbcbb2]/70">
+                    Comprehensive certification in web development and computer programming fundamentals
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="/web-and-computer-programing-certificete.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-[#26272d] bg-[#1b1b1d] px-4 py-2 text-sm font-medium text-white transition-colors hover:border-[#2fe92b]/40 hover:bg-[#202023]"
+                    >
+                      <ExternalLink size={16} />
+                      View Certificate
+                    </a>
+                    <Link
+                      href="/certificates"
+                      className="inline-flex items-center gap-2 rounded-lg border border-[#2fe92b]/20 bg-[#2fe92b]/5 px-4 py-2 text-sm font-medium text-[#2fe92b] transition-colors hover:border-[#2fe92b]/40 hover:bg-[#2fe92b]/10"
+                    >
+                      View All Certificates
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              <motion.div
+                className="pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[rgba(0,0,0,0)] via-[#2fe92b] to-[rgba(0,0,0,0)]"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8, ease }}
+              />
             </div>
           </motion.div>
 
