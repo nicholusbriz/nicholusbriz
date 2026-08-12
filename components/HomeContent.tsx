@@ -215,7 +215,7 @@ function TypewriterCycle({
   const current = words[index % words.length] ?? '';
 
   return (
-    <span className={className}>
+    <span className={`inline-block ${className}`} style={{ minHeight: '1.2em' }}>
       {current.slice(0, subIndex)}
       <motion.span
         aria-hidden
@@ -585,24 +585,26 @@ export default function HomeContent() {
                   variants={reveal}
                   className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-7xl"
                 >
-                  Hi, I&apos;m{' '}
-                  <span className="relative inline-block text-[#2fe92b]">
-                    <TypewriterCycle
-                      words={[
-                        'Nicholus',
-                        'Turyamureba',
-                        'aka atbriz',
-                        'Software Developer',
-                        'Full-Stack Engineer',
-                        'Open Source Contributor',
-                        'Tech Blogger',
-                        'Problem Solver',
-                        'Lifelong Learner',
-                        'Coffee-Driven Developer'
-                      ]}
-                    />
-                  </span>
-                  <span className="mt-2 block text-white">I build software that moves.</span>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span>Hi, I&apos;m </span>
+                    <span className="relative text-[#2fe92b]">
+                      <TypewriterCycle
+                        words={[
+                          'Nicholus',
+                          'Turyamureba',
+                          'aka atbriz',
+                          'Software Developer',
+                          'Full-Stack Engineer',
+                          'Open Source Contributor',
+                          'Tech Blogger',
+                          'Problem Solver',
+                          'Lifelong Learner',
+                          'Coffee-Driven Developer'
+                        ]}
+                      />
+                    </span>
+                  </div>
+                  <span className="block text-white mt-2">I build software that moves.</span>
                 </motion.h1>
 
                 <motion.p
@@ -765,7 +767,7 @@ export default function HomeContent() {
             variants={reveal}
             initial="hidden"
             animate="visible"
-            className="mt-16 max-w-3xl mx-auto"
+            className="mt-16 max-w-4xl mx-auto"
           >
             <div className="relative overflow-hidden rounded-2xl border border-[#26272d] bg-[#0f0f0f] shadow-[0_0_60px_rgba(47,233,43,0.08)]">
               <video
