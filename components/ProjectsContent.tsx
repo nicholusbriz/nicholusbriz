@@ -161,29 +161,40 @@ export default function ProjectsContent() {
               {otherProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors"
+                  className="group bg-[#1b1b1d] rounded-lg border border-[#26272d] overflow-hidden hover:border-[#2fe92b]/50 transition-colors"
                 >
-                  <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
-                  <p className="text-[#bbcbb2] mb-4 line-clamp-2 text-sm">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-[#0f0f0f] rounded text-xs text-[#bbcbb2]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#2fe92b] hover:text-[#2fe92b]/80 transition-colors text-sm"
-                  >
-                    View Project
-                    <ExternalLink size={14} />
-                  </a>
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
+                    <p className="text-[#bbcbb2] mb-4 line-clamp-2 text-sm">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="flex items-center gap-1 px-2 py-1 bg-[#0f0f0f] rounded text-xs text-[#bbcbb2]"
+                        >
+                          {getTechIcon(tag)}
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#2fe92b] hover:text-[#2fe92b]/80 transition-colors text-sm"
+                    >
+                      View Project
+                      <ExternalLink size={14} />
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
