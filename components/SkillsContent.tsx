@@ -1,236 +1,161 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { Code2, Server, Database, Cloud, Brain, Monitor } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Code2, Server, Database, Cloud, Brain, Monitor, Layout, Zap, GitBranch, Cpu } from 'lucide-react';
 
 const skillCategories = [
   {
-    name: 'Programming Languages',
-    file: 'languages.ts',
-    icon: Code2,
-    skills: [
-      { name: 'JavaScript', level: 'Expert' },
-      { name: 'TypeScript', level: 'Expert' },
-      { name: 'Python', level: 'Advanced' },
-      { name: 'Java', level: 'Advanced' },
-      { name: 'C#', level: 'Advanced' },
-      { name: 'PHP', level: 'Advanced' },
-      { name: 'SQL', level: 'Expert' },
-    ],
-  },
-  {
-    name: 'Frontend Development',
-    file: 'frontend.tsx',
+    name: 'Frontend',
     icon: Monitor,
+    color: 'from-blue-500 to-cyan-500',
     skills: [
-      { name: 'React', level: 'Advanced' },
-      { name: 'Next.js', level: 'Advanced' },
-      { name: 'HTML5', level: 'Expert' },
-      { name: 'CSS3', level: 'Expert' },
-      { name: 'Tailwind CSS', level: 'Advanced' },
-      { name: 'Responsive Design', level: 'Expert' },
+      { name: 'React', level: 95 },
+      { name: 'Next.js', level: 90 },
+      { name: 'TypeScript', level: 92 },
+      { name: 'Tailwind CSS', level: 88 },
+      { name: 'HTML/CSS', level: 98 },
     ],
   },
   {
-    name: 'Backend Development',
-    file: 'backend.py',
+    name: 'Backend',
     icon: Server,
+    color: 'from-purple-500 to-pink-500',
     skills: [
-      { name: 'Node.js', level: 'Advanced' },
-      { name: 'Express.js', level: 'Advanced' },
-      { name: 'REST APIs', level: 'Expert' },
-      { name: 'GraphQL', level: 'Advanced' },
-      { name: 'Authentication', level: 'Advanced' },
+      { name: 'Node.js', level: 88 },
+      { name: 'Express', level: 85 },
+      { name: 'REST APIs', level: 92 },
+      { name: 'GraphQL', level: 78 },
+      { name: 'Authentication', level: 85 },
     ],
   },
   {
-    name: 'Databases',
-    file: 'schema.sql',
+    name: 'Database',
     icon: Database,
+    color: 'from-green-500 to-emerald-500',
     skills: [
-      { name: 'MongoDB', level: 'Advanced' },
-      { name: 'PostgreSQL', level: 'Advanced' },
-      { name: 'MySQL', level: 'Advanced' },
-      { name: 'Redis', level: 'Intermediate' },
-      { name: 'Database Design', level: 'Advanced' },
+      { name: 'MongoDB', level: 85 },
+      { name: 'PostgreSQL', level: 82 },
+      { name: 'MySQL', level: 80 },
+      { name: 'Redis', level: 72 },
+      { name: 'Prisma', level: 78 },
     ],
   },
   {
-    name: 'Cloud & DevOps',
-    file: 'infra.yaml',
+    name: 'DevOps',
     icon: Cloud,
+    color: 'from-orange-500 to-red-500',
     skills: [
-      { name: 'AWS', level: 'Intermediate' },
-      { name: 'Docker', level: 'Intermediate' },
-      { name: 'Git', level: 'Expert' },
-      { name: 'CI/CD', level: 'Intermediate' },
-      { name: 'Linux', level: 'Advanced' },
-    ],
-  },
-  {
-    name: 'Software Engineering',
-    file: 'architecture.md',
-    icon: Brain,
-    skills: [
-      { name: 'System Design', level: 'Intermediate' },
-      { name: 'Data Structures', level: 'Advanced' },
-      { name: 'Algorithms', level: 'Advanced' },
-      { name: 'Testing', level: 'Advanced' },
-      { name: 'Agile/Scrum', level: 'Advanced' },
+      { name: 'AWS', level: 75 },
+      { name: 'Docker', level: 80 },
+      { name: 'Git', level: 95 },
+      { name: 'CI/CD', level: 78 },
+      { name: 'Linux', level: 82 },
     ],
   },
 ];
-
-const LEVEL_COLOR: Record<string, string> = {
-  Expert: '#2fe92b',
-  Advanced: '#ff9821',
-  Intermediate: '#f57733',
-};
-const DEFAULT_LEVEL_COLOR = '#6b7367';
-const getLevelColor = (level: string) => LEVEL_COLOR[level] ?? DEFAULT_LEVEL_COLOR;
 
 const tools = [
-  'vs-code', 'github', 'gitlab', 'postman', 'figma', 'docker',
-  'aws-cli', 'vercel', 'netlify', 'mongodb-atlas', 'jest', 'cypress',
-  'webpack', 'vite', 'npm', 'yarn', 'linux', 'macos',
-  'chrome-devtools', 'graphql-playground', 'redis', 'nginx', 'pm2', 'slack',
+  { name: 'VS Code', category: 'Editor' },
+  { name: 'GitHub', category: 'Version Control' },
+  { name: 'Postman', category: 'API Testing' },
+  { name: 'Figma', category: 'Design' },
+  { name: 'Docker', category: 'Containerization' },
+  { name: 'Vercel', category: 'Deployment' },
+  { name: 'MongoDB Atlas', category: 'Database' },
+  { name: 'Jest', category: 'Testing' },
+  { name: 'Cypress', category: 'E2E Testing' },
+  { name: 'Webpack', category: 'Build Tools' },
+  { name: 'Vite', category: 'Build Tools' },
+  { name: 'Linux', category: 'OS' },
 ];
 
-// Deterministic pseudo-version per tool name, so numbers are stable across renders.
-const versionFor = (name: string) => {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
-  const major = 1 + (hash % 4);
-  const minor = (hash >> 3) % 20;
-  const patch = hash % 10;
-  return `^${major}.${minor}.${patch}`;
+const experiences = [
+  { title: 'Frontend Development', years: '5+ years', level: 95, description: 'Building modern user interfaces' },
+  { title: 'Backend Development', years: '4+ years', level: 88, description: 'Server-side logic and APIs' },
+  { title: 'Database Design', years: '4+ years', level: 85, description: 'Data modeling and optimization' },
+  { title: 'Cloud Infrastructure', years: '3+ years', level: 75, description: 'AWS and deployment' },
+];
+
+const reveal = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
 };
 
-const experience = [
-  { label: 'frontend-development', years: '5+ years', level: 95 },
-  { label: 'backend-development', years: '4+ years', level: 90 },
-  { label: 'database-management', years: '4+ years', level: 88 },
-  { label: 'cloud-devops', years: '3+ years', level: 75 },
-  { label: 'system-design', years: '3+ years', level: 80 },
-];
-
-const terminalLines = [
-  { prompt: '$', text: 'ls skills/' },
-  { prompt: '>', text: 'languages.ts  frontend.tsx  backend.py  schema.sql  infra.yaml  architecture.md' },
-  { prompt: '$', text: 'cat skills/*.* | wc -l' },
-  { prompt: '>', text: '35 skills across 6 categories, updated continuously' },
-];
-
-function TerminalHero() {
-  const reduceMotion = useReducedMotion();
-  return (
-    <div className="max-w-2xl mx-auto rounded-lg border border-[#26272d] bg-[#0f0f0f] overflow-hidden font-mono text-sm">
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-[#26272d] bg-[#1b1b1d]">
-        <span className="w-2 h-2 rounded-full bg-[#2fe92b]" />
-        <span className="text-[#6b7367] text-xs">zsh — skills.sh — 80×24</span>
-      </div>
-      <div className="p-5 space-y-2">
-        {terminalLines.map((line, i) => (
-          <motion.div
-            key={i}
-            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: reduceMotion ? 0 : i * 0.35, duration: 0.4 }}
-            className={line.prompt === '$' ? 'text-white' : 'text-[#bbcbb2]'}
-          >
-            <span className="text-[#2fe92b] mr-2">{line.prompt}</span>
-            {line.text}
-          </motion.div>
-        ))}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: reduceMotion ? 0 : terminalLines.length * 0.35 }}
-          className="inline-block w-2 h-4 bg-[#2fe92b] align-middle animate-pulse"
-          aria-hidden
-        />
-      </div>
-    </div>
-  );
-}
-
-function CommitGraph({ level }: { level: number }) {
-  const cellCount = 28;
-  const lit = Math.round((level / 100) * cellCount);
-  return (
-    <div className="flex flex-wrap gap-1" aria-hidden>
-      {Array.from({ length: cellCount }).map((_, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ delay: i * 0.015, duration: 0.25 }}
-          className="w-3 h-3 rounded-[2px]"
-          style={{
-            backgroundColor: i < lit ? '#2fe92b' : '#26272d',
-            opacity: i < lit ? 0.35 + 0.65 * (i / cellCount) : 1,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
 
 export default function SkillsContent() {
-  const reduceMotion = useReducedMotion();
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center mb-10">
-          <p className="font-mono text-xs tracking-widest text-[#2fe92b] mb-3">// skills.tsx</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Skills & Expertise</h1>
-          <p className="text-lg text-[#bbcbb2] max-w-2xl mx-auto">
-            Technologies and tools I work with to bring ideas to life
-          </p>
+      <section className="px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h1 className="text-5xl sm:text-6xl font-bold mb-6">
+              ATBRIZ
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+                Skills & Expertise
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600">
+              Technologies and tools I use to build exceptional digital experiences
+            </p>
+          </motion.div>
         </div>
-        <TerminalHero />
       </section>
 
-      {/* Skill files */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillCategories.map((category, catIndex) => {
+      {/* Skill Categories - Vertical Cards */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-6">
+            {skillCategories.map((category, index) => {
               const Icon = category.icon;
               return (
                 <motion.div
                   key={category.name}
-                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.4, delay: (catIndex % 3) * 0.08 }}
-                  className="rounded-lg border border-[#26272d] bg-[#1b1b1d] overflow-hidden hover:border-[#2fe92b]/50 transition-colors"
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-3xl p-8 border border-gray-200 hover:border-indigo-300 transition-all hover:shadow-lg"
                 >
-                  {/* file tab */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-[#26272d]">
-                    <div className="p-1.5 bg-[#2fe92b]/10 rounded">
-                      <Icon className="w-4 h-4 text-[#2fe92b]" />
+                  <div className="flex items-start justify-between mb-8">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
+                      <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <span className="font-mono text-sm text-white">{category.file}</span>
-                    <span className="ml-auto font-mono text-[10px] text-[#6b7367]">
-                      {category.skills.length} skills
-                    </span>
+                    <span className="text-sm text-gray-500 font-medium">{category.skills.length} skills</span>
                   </div>
 
-                  {/* code body */}
-                  <div className="p-4 font-mono text-[13px] space-y-1.5">
+                  <h3 className="text-2xl font-bold mb-6">{category.name}</h3>
+
+                  <div className="space-y-4">
                     {category.skills.map((skill) => (
-                      <div key={skill.name} className="flex items-baseline justify-between gap-3">
-                        <span className="text-[#bbcbb2] truncate">{skill.name}</span>
-                        <span
-                          className="whitespace-nowrap"
-                          style={{ color: getLevelColor(skill.level) }}
-                        >
-                          {'// ' + skill.level.toLowerCase()}
-                        </span>
+                      <div key={skill.name}>
+                        <div className="flex justify-between mb-2">
+                          <span className="font-medium text-gray-900">{skill.name}</span>
+                          <span className="text-sm text-gray-500">{skill.level}%</span>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className={`h-full bg-gradient-to-r ${category.color} rounded-full`}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -241,56 +166,114 @@ export default function SkillsContent() {
         </div>
       </section>
 
-      {/* Tools as a dependency manifest */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-2 text-center">Tools & Technologies</h2>
-          <p className="text-[#6b7367] text-center font-mono text-xs mb-8">devtools.json</p>
+      {/* Tools Grid - Unique Layout */}
+      <section className="px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-4">Tools & Technologies</h2>
+            <p className="text-xl text-gray-600">Development tools I use daily</p>
+          </motion.div>
 
-          <div className="rounded-lg border border-[#26272d] bg-[#0f0f0f] p-6 font-mono text-[13px] overflow-x-auto">
-            <div className="text-[#bbcbb2]">{'{'}</div>
-            {tools.map((tool, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {tools.map((tool, index) => (
               <motion.div
-                key={tool}
-                initial={reduceMotion ? false : { opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.02 }}
-                className="pl-6 hover:bg-[#1b1b1d] rounded px-2 -mx-2 transition-colors"
+                key={tool.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-gray-50 rounded-2xl p-6 hover:bg-indigo-50 transition-colors group"
               >
-                <span className="text-[#ff9821]">&quot;{tool}&quot;</span>
-                <span className="text-[#6b7367]">: </span>
-                <span className="text-[#2fe92b]">&quot;{versionFor(tool)}&quot;</span>
-                {i < tools.length - 1 && <span className="text-[#6b7367]">,</span>}
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                  <Zap className="w-5 h-5 text-indigo-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-1">{tool.name}</h3>
+                <p className="text-sm text-gray-500">{tool.category}</p>
               </motion.div>
             ))}
-            <div className="text-[#bbcbb2]">{'}'}</div>
           </div>
         </div>
       </section>
 
-      {/* Experience as commit history */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-2 text-center">Experience Level</h2>
-          <p className="text-[#6b7367] text-center font-mono text-xs mb-8">git log --stat --author=me</p>
+      {/* Experience Timeline */}
+      <section className="px-4 py-24 sm:px-6 lg:px-8 bg-gray-900">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold text-white mb-4">Experience Level</h2>
+            <p className="text-xl text-gray-400">Years of hands-on experience</p>
+          </motion.div>
 
-          <div className="space-y-6">
-            {experience.map((exp) => (
-              <div key={exp.label} className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d]">
-                <div className="flex justify-between items-baseline mb-4 flex-wrap gap-2">
+          <div className="grid md:grid-cols-2 gap-8">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={exp.title}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-gray-800 rounded-3xl p-8 border border-gray-700"
+              >
+                <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h3 className="font-mono text-sm text-white">{exp.label}</h3>
-                    <p className="text-sm text-[#6b7367]">{exp.years}</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
+                    <p className="text-gray-400">{exp.description}</p>
                   </div>
-                  <span className="text-[#2fe92b] font-mono font-semibold text-sm">
-                    {exp.level}% coverage
-                  </span>
+                  <div className="text-right">
+                    <p className="text-3xl font-bold text-indigo-400">{exp.level}%</p>
+                    <p className="text-sm text-gray-500">{exp.years}</p>
+                  </div>
                 </div>
-                <CommitGraph level={exp.level} />
-              </div>
+
+                <div className="relative h-3 bg-gray-700 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${exp.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.3 }}
+                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+                  />
+                </div>
+
+                <div className="mt-6 flex items-center gap-4">
+                  <Cpu className="w-5 h-5 text-indigo-400" />
+                  <GitBranch className="w-5 h-5 text-purple-400" />
+                  <Layout className="w-5 h-5 text-pink-400" />
+                </div>
+              </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-4 py-24 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold mb-6">Let's build something together</h2>
+            <p className="text-xl text-gray-600 mb-10">
+              Have a project in mind? I'd love to hear about it.
+            </p>
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
+            >
+              Get in touch
+            </a>
+          </motion.div>
         </div>
       </section>
     </div>

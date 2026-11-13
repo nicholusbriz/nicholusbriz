@@ -14,131 +14,173 @@ export const metadata: Metadata = {
   },
 };
 
-import { Mail, Phone, MapPin, Send, GitFork, Link2, MessageCircle, Code, Users, Briefcase, GraduationCap, Rocket, Coffee } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, GitFork, Link2, MessageCircle, Code, Users, Briefcase, GraduationCap, Rocket, Coffee, Clock, Globe, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ContactPage() {
-  const contactCards = [
-    { 
-      icon: Mail, 
-      title: 'Email Me', 
-      detail: 'turyamurebanicholus@gmail.com',
+  const contactMethods = [
+    {
+      icon: Mail,
+      title: 'Email',
+      value: 'turyamurebanicholus@gmail.com',
       description: 'Usually replies within 24 hours',
       href: 'mailto:turyamurebanicholus@gmail.com',
+      color: 'from-blue-500 to-cyan-500',
     },
-    { 
-      icon: Phone, 
-      title: 'Call Me', 
-      detail: '+256 761 996 296',
-      description: 'Available Mon–Fri, 09:00–18:00 EAT',
+    {
+      icon: Phone,
+      title: 'Phone',
+      value: '+256 761 996 296',
+      description: 'Mon–Fri, 09:00–18:00 EAT',
       href: 'tel:+256761996296',
+      color: 'from-green-500 to-emerald-500',
     },
-    { 
-      icon: MapPin, 
-      title: 'Location', 
-      detail: 'Kampala, Uganda',
+    {
+      icon: MapPin,
+      title: 'Location',
+      value: 'Kampala, Uganda',
       description: 'Open to Remote Work Worldwide',
       href: undefined,
+      color: 'from-purple-500 to-pink-500',
     },
   ];
 
-  const socialCards = [
-    { 
-      icon: GitFork, 
-      title: 'GitHub', 
-      detail: '120+ Repositories',
-      description: 'Explore My Code →',
+  const socialLinks = [
+    {
+      icon: GitFork,
+      title: 'GitHub',
+      description: '120+ Repositories',
       href: 'https://github.com/nicholusbriz',
+      color: 'bg-gray-900',
     },
-    { 
-      icon: Link2, 
-      title: 'LinkedIn', 
-      detail: 'Professional Network',
-      description: "Let's Connect →",
+    {
+      icon: Link2,
+      title: 'LinkedIn',
+      description: 'Professional Network',
       href: 'https://www.linkedin.com/in/nicholus-turyamureba-194363378',
+      color: 'bg-blue-600',
     },
-    { 
-      icon: MessageCircle, 
-      title: 'WhatsApp', 
-      detail: 'Quick Conversation',
-      description: 'Usually Active',
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      description: 'Quick Conversation',
       href: 'https://wa.me/256761996296',
+      color: 'bg-green-500',
     },
   ];
 
-  const collaborationAreas = [
-    { icon: Code, title: 'Web Applications', description: 'Full-stack development with modern frameworks' },
-    { icon: Users, title: 'Community Platforms', description: 'Building spaces that connect people' },
+  const services = [
+    { icon: Code, title: 'Web Development', description: 'Full-stack applications with modern frameworks' },
+    { icon: Users, title: 'Platform Building', description: 'Community and collaboration platforms' },
     { icon: Briefcase, title: 'Technical Consulting', description: 'Expert guidance for your projects' },
     { icon: GraduationCap, title: 'Mentorship', description: 'Helping developers grow and learn' },
-    { icon: Rocket, title: 'Open Source', description: 'Contributing to the developer ecosystem' },
-    { icon: Coffee, title: 'Collaboration', description: "Let's build something amazing together" },
+    { icon: Rocket, title: 'Open Source', description: 'Contributing to the ecosystem' },
+    { icon: Coffee, title: 'Collaboration', description: "Let's build something amazing" },
+  ];
+
+  const workingHours = [
+    { day: 'Monday - Friday', hours: '09:00 - 18:00 EAT' },
+    { day: 'Saturday', hours: '10:00 - 14:00 EAT' },
+    { day: 'Sunday', hours: 'Closed' },
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Let's Build Something Amazing</h1>
-          <p className="text-lg text-[#bbcbb2] max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
+    <div className="min-h-screen bg-white">
+      {/* Hero */}
+      <section className="px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h1 className="text-5xl sm:text-6xl font-bold mb-6">
+                Let's Build
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+                  Something Amazing
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 max-w-2xl mb-8">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              </p>
+              <div className="flex items-center gap-4 text-gray-500">
+                <Clock className="w-5 h-5" />
+                <span>Usually replies within 24 hours</span>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl transform rotate-3" />
+              <div className="relative bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center">
+                    <Send className="w-7 h-7 text-indigo-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Quick Contact</h3>
+                    <p className="text-gray-500">Send me a message directly</p>
+                  </div>
+                </div>
+                <a
+                  href="mailto:turyamurebanicholus@gmail.com"
+                  className="block w-full text-center px-8 py-4 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
+                >
+                  Send Me an Email
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Contact Cards */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">Get In Touch</h2>
+      {/* Contact Methods - Large cards */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl">
           <div className="grid md:grid-cols-3 gap-6">
-            {contactCards.map((card) => {
-              const Icon = card.icon;
+            {contactMethods.map((method) => {
+              const Icon = method.icon;
               const content = (
-                <div className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors text-center">
-                  <Icon className="w-8 h-8 text-[#2fe92b] mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">{card.title}</h3>
-                  <p className="text-[#bbcbb2] mb-1">{card.detail}</p>
-                  <p className="text-sm text-[#bbcbb2]/70">{card.description}</p>
+                <div className="relative overflow-hidden rounded-3xl bg-white p-8 border border-gray-200 hover:border-indigo-300 transition-all hover:shadow-lg group">
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${method.color} opacity-10 rounded-full transform translate-x-8 -translate-y-8 group-hover:scale-110 transition-transform`} />
+                  <div className={`w-16 h-16 bg-gradient-to-br ${method.color} rounded-2xl flex items-center justify-center mb-6`}>
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{method.title}</h3>
+                  <p className="text-lg text-gray-900 mb-2">{method.value}</p>
+                  <p className="text-gray-500">{method.description}</p>
                 </div>
               );
 
-              if (card.href) {
+              if (method.href) {
                 return (
-                  <a
-                    key={card.title}
-                    href={card.href}
-                    className="block"
-                  >
+                  <a key={method.title} href={method.href} className="block">
                     {content}
                   </a>
                 );
               }
-              return <div key={card.title}>{content}</div>;
+              return <div key={method.title}>{content}</div>;
             })}
           </div>
         </div>
       </section>
 
-      {/* Social Links */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">Connect With Me</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {socialCards.map((card) => {
-              const Icon = card.icon;
+      {/* Social Links - Horizontal scroll */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="text-3xl font-bold mb-8">Connect With Me</h2>
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
               return (
                 <a
-                  key={card.title}
-                  href={card.href}
+                  key={social.title}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-6 bg-[#0f0f0f] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors text-center group"
+                  className="flex-shrink-0 w-72"
                 >
-                  <Icon className="w-8 h-8 text-[#2fe92b] mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-lg font-semibold text-white mb-2">{card.title}</h3>
-                  <p className="text-[#bbcbb2] mb-1">{card.detail}</p>
-                  <p className="text-sm text-[#2fe92b]">{card.description}</p>
+                  <div className={`h-full ${social.color} rounded-2xl p-6 text-white hover:opacity-90 transition-opacity`}>
+                    <Icon className="w-8 h-8 mb-4" />
+                    <h3 className="text-xl font-bold mb-2">{social.title}</h3>
+                    <p className="text-white/80">{social.description}</p>
+                  </div>
                 </a>
               );
             })}
@@ -146,21 +188,21 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Collaboration Areas */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">Let's Collaborate On</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {collaborationAreas.map((area) => {
-              const Icon = area.icon;
+      {/* Services - Bento grid */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="text-3xl font-bold mb-8">Let's Collaborate On</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((service, index) => {
+              const Icon = service.icon;
               return (
                 <div
-                  key={area.title}
-                  className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors"
+                  key={service.title}
+                  className={`bg-white rounded-2xl p-6 border border-gray-200 hover:border-indigo-300 transition-colors ${index === 0 ? 'md:col-span-2' : ''}`}
                 >
-                  <Icon className="w-6 h-6 text-[#2fe92b] mb-3" />
-                  <h3 className="text-lg font-semibold text-white mb-2">{area.title}</h3>
-                  <p className="text-[#bbcbb2] text-sm">{area.description}</p>
+                  <Icon className="w-8 h-8 text-indigo-600 mb-4" />
+                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <p className="text-gray-600">{service.description}</p>
                 </div>
               );
             })}
@@ -168,56 +210,87 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Direct Message CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="p-8 bg-[#0f0f0f] rounded-lg border border-[#26272d]">
-            <Send className="w-12 h-12 text-[#2fe92b] mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-4">Ready to Start a Project?</h2>
-            <p className="text-[#bbcbb2] mb-6">
-              Send me a message and let's discuss how we can work together to bring your ideas to life.
-            </p>
-            <a
-              href="mailto:turyamurebanicholus@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#2fe92b] text-[#0f0f0f] rounded-lg font-medium hover:bg-[#2fe92b]/90 transition-colors"
-            >
-              <Mail size={20} />
-              Send Me an Email
-            </a>
+      {/* Working Hours */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Working Hours</h2>
+              <p className="text-gray-600 mb-8">
+                I'm available for projects and consultations during these hours. Feel free to reach out anytime, and I'll get back to you as soon as possible.
+              </p>
+              <div className="space-y-4">
+                {workingHours.map((schedule) => (
+                  <div key={schedule.day} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                    <span className="font-medium text-gray-900">{schedule.day}</span>
+                    <span className="text-gray-600">{schedule.hours}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl p-8 text-white">
+              <Globe className="w-12 h-12 mb-6" />
+              <h3 className="text-2xl font-bold mb-4">Global Availability</h3>
+              <p className="text-white/90 mb-6">
+                While I'm based in Kampala, Uganda (EAT timezone), I'm open to remote work with clients and teams worldwide.
+              </p>
+              <div className="flex items-center gap-2 text-white/80">
+                <MapPin className="w-5 h-5" />
+                <span>Kampala, Uganda (EAT)</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Quick Links */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8 text-center">Explore More</h2>
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="text-3xl font-bold mb-8">Explore More</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <Link
               href="/projects"
-              className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors text-center group"
+              className="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-300 transition-all hover:shadow-lg"
             >
-              <Briefcase className="w-8 h-8 text-[#2fe92b] mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-lg font-semibold text-white mb-2">View Projects</h3>
-              <p className="text-[#bbcbb2] text-sm">See my recent work</p>
+              <Briefcase className="w-12 h-12 text-indigo-600 mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold mb-2">View Projects</h3>
+              <p className="text-gray-600">See my recent work and case studies</p>
             </Link>
             <Link
               href="/skills"
-              className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors text-center group"
+              className="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-300 transition-all hover:shadow-lg"
             >
-              <Code className="w-8 h-8 text-[#2fe92b] mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-lg font-semibold text-white mb-2">My Skills</h3>
-              <p className="text-[#bbcbb2] text-sm">Technologies I work with</p>
+              <Code className="w-12 h-12 text-indigo-600 mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold mb-2">My Skills</h3>
+              <p className="text-gray-600">Technologies and tools I work with</p>
             </Link>
             <Link
               href="/about"
-              className="p-6 bg-[#1b1b1d] rounded-lg border border-[#26272d] hover:border-[#2fe92b]/50 transition-colors text-center group"
+              className="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-indigo-300 transition-all hover:shadow-lg"
             >
-              <GraduationCap className="w-8 h-8 text-[#2fe92b] mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-lg font-semibold text-white mb-2">About Me</h3>
-              <p className="text-[#bbcbb2] text-sm">Learn more about my journey</p>
+              <GraduationCap className="w-12 h-12 text-indigo-600 mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold mb-2">About Me</h3>
+              <p className="text-gray-600">Learn more about my journey and values</p>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-4 py-24 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to Start?</h2>
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+            Send me a message and let's discuss how we can work together to bring your ideas to life.
+          </p>
+          <a
+            href="mailto:turyamurebanicholus@gmail.com"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
+          >
+            <Mail size={20} />
+            Send Me an Email
+          </a>
         </div>
       </section>
     </div>
